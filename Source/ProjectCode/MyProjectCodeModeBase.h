@@ -21,9 +21,16 @@ public:
 
 	UPROPERTY()
 		AMyFirstActor* SpawnedActor;
+	UPROPERTY()
+		TArray<AMyFirstActor*> AllSpawnedActors;
+
+	int32 cont;
 
 	UFUNCTION()
 		void DestroyActorFunction();
+	UFUNCTION()
+		void CreateActorFunction();
 
-	FTimerHandle Timer;
+	FTimerHandle TimeoutStart;
+	FTimerHandle TimeoutEnd;
 };
