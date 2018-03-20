@@ -5,6 +5,8 @@
 #include "TimerManager.h"
 
 void AMyProjectCodeModeBase::BeginPlay() {
+
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Actor Spawning"));
 	CreateActorFunction();
 	DestroyActorFunction();
 
@@ -13,7 +15,6 @@ void AMyProjectCodeModeBase::BeginPlay() {
 void AMyProjectCodeModeBase::CreateActorFunction() {
 
 	GetWorldTimerManager().SetTimer(TimeoutStart, this, &AMyProjectCodeModeBase::CreateActorFunction, rand() % 20 + 5);
-	GEngine->AddOnScreenDebugMessage(-1, -1, FColor::Red, TEXT("Actor Spawning"));
 
 		float x = rand() % 200 + (-200);
 		float y = rand() % 200 + (-200);
@@ -24,7 +25,9 @@ void AMyProjectCodeModeBase::CreateActorFunction() {
 		if (SpawnedActor != nullptr) {
 			AllSpawnedActors.Add(SpawnedActor);
 		}
-				
+		
+		int size = AllSpawnedActors.Num();
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::White, FString::Printf(TEXT("Actor Created. Array: %d"), size));
 }
 
 void AMyProjectCodeModeBase::DestroyActorFunction() {
@@ -34,6 +37,9 @@ void AMyProjectCodeModeBase::DestroyActorFunction() {
 			AllSpawnedActors.RemoveAt(0);
 			AllSpawnedActors.Shrink();
 			SpawnedActor->Destroy();
+
+			int size = AllSpawnedActors.Num();
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, FString::Printf(TEXT("Actor Destroy. Array: %d"), size));
 	}
 		
 
