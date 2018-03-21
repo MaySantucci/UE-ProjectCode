@@ -33,9 +33,12 @@ void AMyProjectCodeModeBase::CreateActorFunction() {
 void AMyProjectCodeModeBase::DestroyActorFunction() {
 
 	GetWorldTimerManager().SetTimer(TimeoutEnd, this, &AMyProjectCodeModeBase::DestroyActorFunction, rand() % 40 + 20);
-		if (SpawnedActor != nullptr) {
+	AMyFirstActor* FirstSpawned = AllSpawnedActors[0];
+		if (FirstSpawned != nullptr) {
+			FirstSpawned->Destroy();
+			AllSpawnedActors.Find(FirstSpawned);
 			AllSpawnedActors.RemoveAt(0);
-			SpawnedActor->Destroy();
+			AllSpawnedActors.Shrink();	
 
 			int size = AllSpawnedActors.Num();
 			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, FString::Printf(TEXT("Actor Destroy. Array: %d"), size));
