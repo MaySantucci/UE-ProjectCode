@@ -21,7 +21,7 @@ public:
 
 	UPROPERTY()
 		AMyFirstActor* SpawnedActor;
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere, Category="Comps")
 		TArray<AMyFirstActor*> AllSpawnedActors;
 
 	int32 cont;

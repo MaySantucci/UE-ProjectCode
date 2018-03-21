@@ -18,14 +18,14 @@ AMyFirstActor::AMyFirstActor()
 	if (MyMeshAsset.Object != nullptr) {
 		MyMesh->SetStaticMesh(MyMeshAsset.Object);
 	}
-
-
+		
 }
 
 // Called when the game starts or when spawned
 void AMyFirstActor::BeginPlay()
 {
 	Super::BeginPlay();
+	
 	
 }
 
