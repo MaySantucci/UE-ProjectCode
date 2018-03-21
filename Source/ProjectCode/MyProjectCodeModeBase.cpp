@@ -35,7 +35,6 @@ void AMyProjectCodeModeBase::DestroyActorFunction() {
 	GetWorldTimerManager().SetTimer(TimeoutEnd, this, &AMyProjectCodeModeBase::DestroyActorFunction, rand() % 40 + 20);
 		if (SpawnedActor != nullptr) {
 			AllSpawnedActors.RemoveAt(0);
-			AllSpawnedActors.Shrink();
 			SpawnedActor->Destroy();
 
 			int size = AllSpawnedActors.Num();
