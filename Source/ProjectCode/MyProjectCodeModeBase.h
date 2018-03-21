@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "MyFirstActor.h"
+#include "MySecondActor.h"
 #include "MyProjectCodeModeBase.generated.h"
 
 /**
@@ -20,9 +21,13 @@ public:
 	virtual void BeginPlay() override;
 
 	UPROPERTY()
-		AMyFirstActor* SpawnedActor;
-	UPROPERTY(VisibleAnywhere, Category="Comps")
-		TArray<AMyFirstActor*> AllSpawnedActors;
+		AMyFirstActor* SpawnedFirstActor;
+	UPROPERTY()
+		AMySecondActor* SpawnedSecondActor;
+	UPROPERTY()
+		TArray<AMyFirstActor*> AllFirstSpawnedActors;
+	UPROPERTY()
+		TArray<AMySecondActor*> AllSecondSpawnedActors;
 
 	int32 cont;
 
@@ -30,7 +35,13 @@ public:
 		void DestroyActorFunction();
 	UFUNCTION()
 		void CreateActorFunction();
+	UFUNCTION()
+		void DestroySecondActorFunction();
+	UFUNCTION()
+		void CreateSecondActorFunction();
 
 	FTimerHandle TimeoutStart;
 	FTimerHandle TimeoutEnd;
+	FTimerHandle TimeoutSecondStart;
+	FTimerHandle TimeoutSecondEnd;
 };

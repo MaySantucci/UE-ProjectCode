@@ -15,8 +15,12 @@ AMyFirstActor::AMyFirstActor()
 
 	auto MyMeshAsset = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("/Game/StarterContent/Shapes/Shape_Sphere.Shape_Sphere"));
 
+	auto MyMeshMaterial = ConstructorHelpers::FObjectFinder<UMaterialInterface>(TEXT("/Game/StarterContent/Materials/M_Wood_Pine"));
+
+
 	if (MyMeshAsset.Object != nullptr) {
 		MyMesh->SetStaticMesh(MyMeshAsset.Object);
+		MyMesh->SetMaterial(0, MyMeshMaterial.Object);
 	}
 		
 }
