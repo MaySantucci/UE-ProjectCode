@@ -46,6 +46,17 @@ public:
 	/* Resets HMD Origin position and orientation */
 	void ResetHMDOrigin();
 
-	
+	UFUNCTION()
+		virtual void MotionControlLeftTriggerPressed();
+
+	UFUNCTION()
+		virtual void MotionControlLeftTriggerReleased();
+
+	UFUNCTION()
+		virtual void MotionControlRightTriggerPressed();
+
+	UFUNCTION()
+		virtual void MotionControlRightTriggerReleased();
+
 	
 };

@@ -5,6 +5,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "HeadMountedDisplay.h"
 #include "MotionControllerComponent.h"
+#include "MyPlayer.h"
 
 
 // Sets default values
@@ -75,10 +76,42 @@ void AMotionControllerPawn::Tick(float DeltaTime)
 
 }
 
-// Called to bind functionality to input
-void AMotionControllerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+// Left Trigger Press
+void AMotionControllerPawn::MotionControlLeftTriggerPressed()
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	
+	UE_LOG(LogTemp, Warning, TEXT("Left trigger is PRESSED"));
+}
+
+// Left Trigger Release
+void AMotionControllerPawn::MotionControlLeftTriggerReleased()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Left trigger is RELEASED"));
+}
+
+// Right Trigger Press
+void AMotionControllerPawn::MotionControlRightTriggerPressed()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Right trigger is PRESSED"));
+}
+
+// Right Trigger Release
+void AMotionControllerPawn::MotionControlRightTriggerReleased()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Right trigger is RELEASED"));
+}
+
+
+
+// Called to bind functionality to input
+
+void AMotionControllerPawn::SetupPlayerInputComponent(class UInputComponent* InputComponent)
+{
+	Super::SetupPlayerInputComponent(InputComponent);
+	//Motion controller bindings
+	InputComponent->BindAction("LeftTrigger", EInputEvent::IE_Pressed, this, &AMotionControllerPawn::MotionControlLeftTriggerPressed);
+	InputComponent->BindAction("LeftTrigger", EInputEvent::IE_Released, this, &AMotionControllerPawn::MotionControlLeftTriggerReleased);
+	InputComponent->BindAction("RightTrigger", EInputEvent::IE_Pressed, this, &AMotionControllerPawn::MotionControlRightTriggerPressed);
+	InputComponent->BindAction("RightTrigger", EInputEvent::IE_Released, this, &AMotionControllerPawn::MotionControlRightTriggerReleased);
+
 }
 

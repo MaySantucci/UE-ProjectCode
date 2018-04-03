@@ -18,6 +18,7 @@ class PROJECTCODE_API AMyProjectCodeModeBase : public AGameModeBase
 
 		
 public:
+	AMyProjectCodeModeBase();
 	virtual void BeginPlay() override;
 
 	UPROPERTY()

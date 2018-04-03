@@ -3,6 +3,19 @@
 #include "MyProjectCodeModeBase.h"
 #include "Runtime/Engine/Classes/Engine/Engine.h"
 #include "TimerManager.h"
+#include "MyPlayer.h"
+#include "MotionControllerPawn.h"
+
+AMyProjectCodeModeBase::AMyProjectCodeModeBase()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Inizioooo"));
+	PlayerControllerClass = AMyPlayer::StaticClass();
+
+	//you can set whatever (if any) other default framework classes
+	//you wish for this game mode as well
+	DefaultPawnClass = AMotionControllerPawn::StaticClass();
+}
+
 void AMyProjectCodeModeBase::BeginPlay() {
 
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Actors Spawning"));
