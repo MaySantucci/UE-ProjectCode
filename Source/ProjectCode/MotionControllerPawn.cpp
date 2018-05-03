@@ -6,6 +6,7 @@
 #include "HeadMountedDisplay.h"
 #include "MotionControllerComponent.h"
 #include "MyPlayer.h"
+#include "Engine.h"
 
 
 // Sets default values
@@ -80,24 +81,28 @@ void AMotionControllerPawn::Tick(float DeltaTime)
 void AMotionControllerPawn::MotionControlLeftTriggerPressed()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Left trigger is PRESSED"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Left trigger is PRESSED");
 }
 
 // Left Trigger Release
 void AMotionControllerPawn::MotionControlLeftTriggerReleased()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Left trigger is RELEASED"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Left trigger is RELEASED");
 }
 
 // Right Trigger Press
 void AMotionControllerPawn::MotionControlRightTriggerPressed()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Right trigger is PRESSED"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Right trigger is PRESSED");
 }
 
 // Right Trigger Release
 void AMotionControllerPawn::MotionControlRightTriggerReleased()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Right trigger is RELEASED"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Right trigger is RELEASED");
 }
 
 
