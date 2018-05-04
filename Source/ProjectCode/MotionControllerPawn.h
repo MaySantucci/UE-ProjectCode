@@ -6,6 +6,10 @@
 #include "GameFramework/Pawn.h"
 #include "Camera/CameraComponent.h"
 #include "MotionControllerComponent.h"
+#include "Components/ArrowComponent.h"
+#include "Components/SplineComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Components/SphereComponent.h"
 #include "MotionControllerPawn.generated.h"
 
 UCLASS()
@@ -18,7 +22,7 @@ public:
 	AMotionControllerPawn();
 
 	UPROPERTY()
-		USceneComponent* VRCameraRoot;
+		USceneComponent* VROrigin;
 	UPROPERTY()
 		UCameraComponent* Camera;
 	UPROPERTY()
@@ -26,9 +30,11 @@ public:
 	UPROPERTY()
 		UMotionControllerComponent* RightHand;
 	UPROPERTY()
-		UStaticMeshComponent* LeftMesh;
+		USkeletalMeshComponent* LeftMesh;
 	UPROPERTY()
-		UStaticMeshComponent* RightMesh;
+		USkeletalMeshComponent* RightMesh;
+	UPROPERTY()
+		FName DeviceName;
 
 protected:
 	// Called when the game starts or when spawned

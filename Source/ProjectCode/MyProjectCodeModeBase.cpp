@@ -10,9 +10,6 @@ AMyProjectCodeModeBase::AMyProjectCodeModeBase()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Inizioooo"));
 	PlayerControllerClass = AMyPlayer::StaticClass();
-
-	//you can set whatever (if any) other default framework classes
-	//you wish for this game mode as well
 	DefaultPawnClass = AMotionControllerPawn::StaticClass();
 }
 
