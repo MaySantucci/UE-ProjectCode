@@ -20,6 +20,11 @@ AMySecondActor::AMySecondActor()
 		MyBadMesh->SetMaterial(0, MyBadMeshMaterial.Object);
 	}
 
+
+	MyBadMesh->SetMobility(EComponentMobility::Movable);
+	MyBadMesh->SetSimulatePhysics(true);
+
+	//auto AutoPossessPlayer = EAutoReceiveInput::Player1;
 }
 
 // Called when the game starts or when spawned

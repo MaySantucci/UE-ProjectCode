@@ -22,7 +22,12 @@ AMyFirstActor::AMyFirstActor()
 		MyMesh->SetStaticMesh(MyMeshAsset.Object);
 		MyMesh->SetMaterial(0, MyMeshMaterial.Object);
 	}
-		
+
+	MyMesh->SetMobility(EComponentMobility::Movable);
+	MyMesh->SetSimulatePhysics(true);
+
+
+	//auto AutoPossessPlayer = EAutoReceiveInput::Player1;
 }
 
 // Called when the game starts or when spawned

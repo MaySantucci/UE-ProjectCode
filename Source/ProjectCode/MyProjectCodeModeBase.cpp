@@ -5,12 +5,24 @@
 #include "TimerManager.h"
 #include "MyPlayer.h"
 #include "MotionControllerPawn.h"
+#include "ConstructorHelpers.h"
 
 AMyProjectCodeModeBase::AMyProjectCodeModeBase()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Inizioooo"));
 	PlayerControllerClass = AMyPlayer::StaticClass();
-	DefaultPawnClass = AMotionControllerPawn::StaticClass();
+	//DefaultPawnClass = AMotionControllerPawn::StaticClass();
+
+	
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnObject(TEXT("Blueprint'/Game/MyMotionControllerPawn.MyMotionControllerPawn_C'"));
+	if (PlayerPawnObject.Class != NULL)
+	{
+		DefaultPawnClass = PlayerPawnObject.Class;
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("Nessun Pawn Trovato"));
+	}
+	
 }
 
 void AMyProjectCodeModeBase::BeginPlay() {

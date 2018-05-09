@@ -12,6 +12,14 @@
 #include "Components/SphereComponent.h"
 #include "MotionControllerPawn.generated.h"
 
+UENUM(BlueprintType)		//"BlueprintType" is essential to include
+enum class GripEnum : uint8
+{
+	Open 	UMETA(DisplayName = "Open"),
+	CanGrab	UMETA(DisplayName = "CanGrab"),
+	Grab 	UMETA(DisplayName = "Grab")
+};
+
 UCLASS()
 class PROJECTCODE_API AMotionControllerPawn : public APawn
 {
@@ -21,21 +29,25 @@ public:
 	// Sets default values for this pawn's properties
 	AMotionControllerPawn();
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		USceneComponent* VROrigin;
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		UCameraComponent* Camera;
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		UMotionControllerComponent* LeftHand;
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		UMotionControllerComponent* RightHand;
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		USkeletalMeshComponent* LeftMesh;
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		USkeletalMeshComponent* RightMesh;
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		FName DeviceName;
+	UPROPERTY()
+		bool bWantsToGrip;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enum)
+		GripEnum GripState;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -52,17 +64,19 @@ public:
 	/* Resets HMD Origin position and orientation */
 	void ResetHMDOrigin();
 
-	UFUNCTION()
+	
+	UFUNCTION(BlueprintCallable)
 		virtual void MotionControlLeftTriggerPressed();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		virtual void MotionControlLeftTriggerReleased();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		virtual void MotionControlRightTriggerPressed();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		virtual void MotionControlRightTriggerReleased();
 
+	
 	
 };
