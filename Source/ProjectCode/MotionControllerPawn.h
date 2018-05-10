@@ -12,6 +12,7 @@
 #include "Components/SphereComponent.h"
 #include "MotionControllerPawn.generated.h"
 
+/* 
 UENUM(BlueprintType)		//"BlueprintType" is essential to include
 enum class GripEnum : uint8
 {
@@ -19,6 +20,7 @@ enum class GripEnum : uint8
 	CanGrab	UMETA(DisplayName = "CanGrab"),
 	Grab 	UMETA(DisplayName = "Grab")
 };
+*/
 
 UCLASS()
 class PROJECTCODE_API AMotionControllerPawn : public APawn
@@ -46,8 +48,8 @@ public:
 	UPROPERTY()
 		bool bWantsToGrip;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enum)
-		GripEnum GripState;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enum)
+		//GripEnum GripState;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
