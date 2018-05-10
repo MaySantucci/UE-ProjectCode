@@ -3,7 +3,7 @@
 #include "MyFirstActor.h"
 #include "ConstructorHelpers.h"
 #include "Components/StaticMeshComponent.h"
-
+#include "Runtime/Engine/Classes/Engine/CollisionProfile.h"
 
 // Sets default values
 AMyFirstActor::AMyFirstActor()
@@ -12,6 +12,7 @@ AMyFirstActor::AMyFirstActor()
 	PrimaryActorTick.bCanEverTick = true;
 
 	MyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MyMesh"));
+	MyMesh->SetWorldScale3D(FVector(0.5f, 0.5f, 0.5f));
 
 	auto MyMeshAsset = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("/Game/StarterContent/Shapes/Shape_Sphere.Shape_Sphere"));
 
@@ -26,7 +27,8 @@ AMyFirstActor::AMyFirstActor()
 	MyMesh->SetMobility(EComponentMobility::Movable);
 	MyMesh->SetSimulatePhysics(true);
 
-
+	MyMesh->SetCollisionProfileName(UCollisionProfile::PhysicsActor_ProfileName);
+	
 	//auto AutoPossessPlayer = EAutoReceiveInput::Player1;
 }
 
