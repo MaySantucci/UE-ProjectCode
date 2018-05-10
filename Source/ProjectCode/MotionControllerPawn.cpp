@@ -75,6 +75,14 @@ AMotionControllerPawn::AMotionControllerPawn()
 		RightMesh->SetAnimInstanceClass(RightMeshAnimation.Object);
 	}
 	
+
+	LeftArcDirection = CreateDefaultSubobject<UArrowComponent>(TEXT("LeftArcDirection"));
+	LeftArcDirection->AttachToComponent(LeftMesh, FAttachmentTransformRules::KeepWorldTransform);
+	RightArcDirection = CreateDefaultSubobject<UArrowComponent>(TEXT("RightArcDirection"));
+	RightArcDirection->AttachToComponent(RightMesh, FAttachmentTransformRules::KeepWorldTransform);
+
+
+
 	RightHand->SetWorldScale3D(FVector(1.0, 1.0, 1.0));
 	RightHand->SetRelativeRotation(FRotator(0.0, 0.0, 90.0));
 	RightHand->SetRelativeLocation(FVector(10.0, 10.0, 0.0));
@@ -93,7 +101,6 @@ void AMotionControllerPawn::BeginPlay()
 
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, DeviceName.ToString());
 		UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(EHMDTrackingOrigin::Eye);
-
 	}
 
 	//STEAM VR
@@ -101,6 +108,7 @@ void AMotionControllerPawn::BeginPlay()
 
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, DeviceName.ToString());
 		UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(EHMDTrackingOrigin::Floor);
+		VROrigin->AddLocalOffset(FVector(0.0f, 0.0f, -105.0f));
 	}
 }
 
