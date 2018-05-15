@@ -44,10 +44,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		USkeletalMeshComponent* RightMesh;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
-		UArrowComponent* LeftArcDirection;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
-		UArrowComponent* RightArcDirection;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		FName DeviceName;
 	UPROPERTY()
 		bool bWantsToGrip;

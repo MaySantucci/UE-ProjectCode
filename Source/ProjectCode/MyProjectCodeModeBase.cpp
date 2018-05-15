@@ -30,8 +30,8 @@ void AMyProjectCodeModeBase::BeginPlay() {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Actors Spawning"));
 	CreateActorFunction();
 	CreateSecondActorFunction();
-	DestroyActorFunction();
-	DestroySecondActorFunction();
+	//DestroyActorFunction();
+	//DestroySecondActorFunction();
 
 }
 

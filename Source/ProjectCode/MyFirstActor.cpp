@@ -4,6 +4,7 @@
 #include "ConstructorHelpers.h"
 #include "Components/StaticMeshComponent.h"
 #include "Runtime/Engine/Classes/Engine/CollisionProfile.h"
+#include "Engine.h"
 
 // Sets default values
 AMyFirstActor::AMyFirstActor()
@@ -28,7 +29,7 @@ AMyFirstActor::AMyFirstActor()
 	MyMesh->SetSimulatePhysics(true);
 
 	MyMesh->SetCollisionProfileName(UCollisionProfile::PhysicsActor_ProfileName);
-	
+	MyMesh->OnComponentBeginOverlap.AddDynamic(this, &AMyFirstActor::OnOverlapBegin);
 	//auto AutoPossessPlayer = EAutoReceiveInput::Player1;
 }
 
@@ -45,5 +46,14 @@ void AMyFirstActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AMyFirstActor::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
+	if (OtherActor && (OtherActor != this) && OtherComp)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
+		UE_LOG(LogTemp, Warning, TEXT("Overlap Begin"));
+		OverlappedComp->DestroyComponent();
+	}
 }
 
