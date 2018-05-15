@@ -57,6 +57,9 @@ void AMyProjectCodeModeBase::CreateActorFunction() {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Location. X: %f . y: %f. z: %f."), x, y, z));
 }
 
+
+
+
 void AMyProjectCodeModeBase::DestroyActorFunction() {
 
 	GetWorldTimerManager().SetTimer(TimeoutEnd, this, &AMyProjectCodeModeBase::DestroyActorFunction, rand() % 40 + 20);

@@ -25,7 +25,7 @@ public:
 		AMyFirstActor* SpawnedFirstActor;
 	UPROPERTY()
 		AMySecondActor* SpawnedSecondActor;
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<AMyFirstActor*> AllFirstSpawnedActors;
 	UPROPERTY()
 		TArray<AMySecondActor*> AllSecondSpawnedActors;
@@ -46,5 +46,6 @@ public:
 	FTimerHandle TimeoutSecondStart;
 	FTimerHandle TimeoutSecondEnd;
 
+	
 
 };

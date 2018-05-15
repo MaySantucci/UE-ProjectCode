@@ -29,7 +29,8 @@ AMyFirstActor::AMyFirstActor()
 	MyMesh->SetSimulatePhysics(true);
 
 	MyMesh->SetCollisionProfileName(UCollisionProfile::PhysicsActor_ProfileName);
-	MyMesh->OnComponentBeginOverlap.AddDynamic(this, &AMyFirstActor::OnOverlapBegin);
+	
+	//MyMesh->OnComponentBeginOverlap.AddDynamic(this, &AMyFirstActor::OnOverlapBegin);
 	//auto AutoPossessPlayer = EAutoReceiveInput::Player1;
 }
 
@@ -53,7 +54,7 @@ void AMyFirstActor::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, cl
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
 		UE_LOG(LogTemp, Warning, TEXT("Overlap Begin"));
-		OverlappedComp->DestroyComponent();
+		OverlappedComp->SetVisibility(false);
 	}
 }
 
