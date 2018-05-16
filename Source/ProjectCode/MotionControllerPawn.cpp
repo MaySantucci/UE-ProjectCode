@@ -108,9 +108,6 @@ void AMotionControllerPawn::BeginPlay()
 void AMotionControllerPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	bWantsToGrip = true;
-
 }
 
 // Left Trigger Press
@@ -118,7 +115,6 @@ void AMotionControllerPawn::MotionControlLeftTriggerPressed()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Left trigger is PRESSED"));
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Left trigger is PRESSED");
-	bWantsToGrip = true;
 	//GripState = GripEnum::Grab;
 }
 
@@ -127,7 +123,6 @@ void AMotionControllerPawn::MotionControlLeftTriggerReleased()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Left trigger is RELEASED"));
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Left trigger is RELEASED");
-	bWantsToGrip = false;
 	//GripState = GripEnum::Open;
 }
 
@@ -136,7 +131,6 @@ void AMotionControllerPawn::MotionControlRightTriggerPressed()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Right trigger is PRESSED"));
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Right trigger is PRESSED");
-	bWantsToGrip = true;
 	//GripState = GripEnum::Grab;
 }
 
@@ -145,7 +139,6 @@ void AMotionControllerPawn::MotionControlRightTriggerReleased()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Right trigger is RELEASED"));
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Right trigger is RELEASED");
-	bWantsToGrip = false;
 	//GripState = GripEnum::Open;
 }
 

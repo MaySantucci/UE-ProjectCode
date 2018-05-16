@@ -6,6 +6,7 @@
 #include "MyPlayer.h"
 #include "MotionControllerPawn.h"
 #include "ConstructorHelpers.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 
 AMyProjectCodeModeBase::AMyProjectCodeModeBase()
 {
@@ -35,6 +36,11 @@ void AMyProjectCodeModeBase::BeginPlay() {
 
 }
 
+void AMyProjectCodeModeBase::Tick(float DeltaTime) {
+	AMotionControllerPawn * MyCharacter = Cast<AMotionControllerPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+
+}
+
 void AMyProjectCodeModeBase::CreateActorFunction() {
 
 	GetWorldTimerManager().SetTimer(TimeoutStart, this, &AMyProjectCodeModeBase::CreateActorFunction, rand() % 20 + 5);
@@ -56,9 +62,6 @@ void AMyProjectCodeModeBase::CreateActorFunction() {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::White, FString::Printf(TEXT("Actor Created. Array: %d"), size));
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Location. X: %f . y: %f. z: %f."), x, y, z));
 }
-
-
-
 
 void AMyProjectCodeModeBase::DestroyActorFunction() {
 
@@ -115,6 +118,33 @@ void AMyProjectCodeModeBase::DestroySecondActorFunction() {
 
 
 }
+
+EPlayState AMyProjectCodeModeBase::GetCurrentState() const {
+	return CurrentState;
+}
+
+void AMyProjectCodeModeBase::SetCurrentState(EPlayState NewState) {
+	CurrentState = NewState;
+	HandleNewState(NewState);
+}
+
+void AMyProjectCodeModeBase::HandleNewState(EPlayState NewState) {
+	
+	switch (NewState) {
+	case EPlayState::EIntro:
+		break;
+	case EPlayState::EPlaying:
+		break;
+	case EPlayState::EEndGame:
+		break;
+
+	default:
+		break;
+	}
+}
+
+
+
 
 
 

@@ -45,8 +45,10 @@ public:
 		USkeletalMeshComponent* RightMesh;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		FName DeviceName;
-	UPROPERTY()
-		bool bWantsToGrip;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Score")
+		int TotalGood;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Score")
+		int TotalBad;
 
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enum)
 		//GripEnum GripState;

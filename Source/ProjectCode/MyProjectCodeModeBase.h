@@ -8,9 +8,12 @@
 #include "MySecondActor.h"
 #include "MyProjectCodeModeBase.generated.h"
 
-/**
- * 
- */
+enum class EPlayState : short {
+	EIntro,
+	EPlaying,
+	EEndGame
+};
+
 UCLASS()
 class PROJECTCODE_API AMyProjectCodeModeBase : public AGameModeBase
 {
@@ -20,13 +23,17 @@ class PROJECTCODE_API AMyProjectCodeModeBase : public AGameModeBase
 public:
 	AMyProjectCodeModeBase();
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY()
 		AMyFirstActor* SpawnedFirstActor;
+
 	UPROPERTY()
 		AMySecondActor* SpawnedSecondActor;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<AMyFirstActor*> AllFirstSpawnedActors;
+
 	UPROPERTY()
 		TArray<AMySecondActor*> AllSecondSpawnedActors;
 
@@ -46,6 +53,11 @@ public:
 	FTimerHandle TimeoutSecondStart;
 	FTimerHandle TimeoutSecondEnd;
 
-	
+	EPlayState GetCurrentState() const;
+	void SetCurrentState(EPlayState NewState);
+
+private:
+	EPlayState CurrentState;
+	void HandleNewState(EPlayState NewState);
 
 };
