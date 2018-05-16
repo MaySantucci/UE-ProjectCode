@@ -49,6 +49,10 @@ public:
 		int TotalGood;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Score")
 		int TotalBad;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "MotionController")
+		bool bWantsToGrip_L;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "MotionController")
+		bool bWantsToGrip_R;
 
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enum)
 		//GripEnum GripState;

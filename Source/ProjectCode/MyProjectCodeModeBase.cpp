@@ -7,13 +7,13 @@
 #include "MotionControllerPawn.h"
 #include "ConstructorHelpers.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+#include "Components/TextRenderComponent.h"
 
 AMyProjectCodeModeBase::AMyProjectCodeModeBase()
 {
+	PrimaryActorTick.bCanEverTick = true;
 	UE_LOG(LogTemp, Warning, TEXT("Inizioooo"));
 	PlayerControllerClass = AMyPlayer::StaticClass();
-	//DefaultPawnClass = AMotionControllerPawn::StaticClass();
-
 	
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnObject(TEXT("Blueprint'/Game/MyMotionControllerPawn.MyMotionControllerPawn_C'"));
 	if (PlayerPawnObject.Class != NULL)
@@ -23,44 +23,55 @@ AMyProjectCodeModeBase::AMyProjectCodeModeBase()
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Nessun Pawn Trovato"));
 	}
+
+	bSpawnEnable = true;
 	
 }
 
-void AMyProjectCodeModeBase::BeginPlay() {
+void AMyProjectCodeModeBase::BeginPlay() 
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("BEGIN PLAY"));
 
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Actors Spawning"));
-	CreateActorFunction();
-	CreateSecondActorFunction();
-	//DestroyActorFunction();
-	//DestroySecondActorFunction();
-
+	if (bSpawnEnable)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Spawn Actors"));
+		CreateActorFunction();
+		CreateSecondActorFunction();
+	}
 }
 
 void AMyProjectCodeModeBase::Tick(float DeltaTime) {
+
 	AMotionControllerPawn * MyCharacter = Cast<AMotionControllerPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
 
+	if(MyCharacter->TotalGood == 3) {
+		SetCurrentState(EPlayState::EEndGame);
+	}
 }
 
-void AMyProjectCodeModeBase::CreateActorFunction() {
+void AMyProjectCodeModeBase::CreateActorFunction() 
+{
+	if (bSpawnEnable)
+	{
+		GetWorldTimerManager().SetTimer(TimeoutStart, this, &AMyProjectCodeModeBase::CreateActorFunction, rand() % 20 + 5);
 
-	GetWorldTimerManager().SetTimer(TimeoutStart, this, &AMyProjectCodeModeBase::CreateActorFunction, rand() % 20 + 5);
+		float x = rand() % 400 + (-400);
+		float y = rand() % 400 + (-400);
+		float z = 32.0f;
+		FVector NewLocation = FVector(x, y, z);
+		FActorSpawnParameters ActorSpawnParameters;
+		ActorSpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
 
-	float x = rand() % 400 + (-400);
-	float y = rand() % 400 + (-400);
-	float z = 32.0f;
-	FVector NewLocation = FVector(x, y, z);
-	FActorSpawnParameters ActorSpawnParameters;
-	ActorSpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+		SpawnedFirstActor = GetWorld()->SpawnActor<AMyFirstActor>(AMyFirstActor::StaticClass(), NewLocation, FRotator::ZeroRotator, ActorSpawnParameters);
 
-	SpawnedFirstActor = GetWorld()->SpawnActor<AMyFirstActor>(AMyFirstActor::StaticClass(), NewLocation, FRotator::ZeroRotator, ActorSpawnParameters);
+		if (SpawnedFirstActor != nullptr) {
+			AllFirstSpawnedActors.Add(SpawnedFirstActor);
+		}
 
-	if (SpawnedFirstActor != nullptr) {
-		AllFirstSpawnedActors.Add(SpawnedFirstActor);
+		int size = AllFirstSpawnedActors.Num();
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::White, FString::Printf(TEXT("Actor Created. Array: %d"), size));
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Location. X: %f . y: %f. z: %f."), x, y, z));
 	}
-
-	int size = AllFirstSpawnedActors.Num();
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::White, FString::Printf(TEXT("Actor Created. Array: %d"), size));
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Location. X: %f . y: %f. z: %f."), x, y, z));
 }
 
 void AMyProjectCodeModeBase::DestroyActorFunction() {
@@ -81,25 +92,27 @@ void AMyProjectCodeModeBase::DestroyActorFunction() {
 }
 
 void AMyProjectCodeModeBase::CreateSecondActorFunction() {
+	if (bSpawnEnable)
+	{
+		GetWorldTimerManager().SetTimer(TimeoutSecondStart, this, &AMyProjectCodeModeBase::CreateSecondActorFunction, rand() % 20 + 5);
 
-	GetWorldTimerManager().SetTimer(TimeoutSecondStart, this, &AMyProjectCodeModeBase::CreateSecondActorFunction, rand() % 20 + 5);
+		float x = rand() % 400 + (-400);
+		float y = rand() % 400 + (-400);
+		float z = 32.0f;
+		FVector NewLocation = FVector(x, y, z);
+		FActorSpawnParameters SecondActorSpawnParameters;
+		SecondActorSpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
 
-	float x = rand() % 400 + (-400);
-	float y = rand() % 400 + (-400);
-	float z = 32.0f;
-	FVector NewLocation = FVector(x, y, z);
-	FActorSpawnParameters SecondActorSpawnParameters;
-	SecondActorSpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+		SpawnedSecondActor = GetWorld()->SpawnActor<AMySecondActor>(AMySecondActor::StaticClass(), NewLocation, FRotator::ZeroRotator, SecondActorSpawnParameters);
 
-	SpawnedSecondActor = GetWorld()->SpawnActor<AMySecondActor>(AMySecondActor::StaticClass(), NewLocation, FRotator::ZeroRotator, SecondActorSpawnParameters);
+		if (SpawnedSecondActor != nullptr) {
+			AllSecondSpawnedActors.Add(SpawnedSecondActor);
+		}
 
-	if (SpawnedSecondActor != nullptr) {
-		AllSecondSpawnedActors.Add(SpawnedSecondActor);
+		int size = AllSecondSpawnedActors.Num();
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("SECOND_Actor Created. Array: %d"), size));
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, FString::Printf(TEXT("SECOND_Location. X: %f . y: %f. z: %f."), x, y, z));
 	}
-
-	int size = AllSecondSpawnedActors.Num();
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("SECOND_Actor Created. Array: %d"), size));
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, FString::Printf(TEXT("SECOND_Location. X: %f . y: %f. z: %f."), x, y, z));
 }
 
 void AMyProjectCodeModeBase::DestroySecondActorFunction() {
@@ -136,15 +149,12 @@ void AMyProjectCodeModeBase::HandleNewState(EPlayState NewState) {
 	case EPlayState::EPlaying:
 		break;
 	case EPlayState::EEndGame:
-		break;
+		bSpawnEnable = false;
+		UE_LOG(LogTemp, Warning, TEXT("Fine Gioco"));
 
-	default:
+		AMotionControllerPawn * MyCharacter = Cast<AMotionControllerPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+		APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+		MyCharacter->DisableInput(PlayerController);
 		break;
 	}
 }
-
-
-
-
-
-

@@ -79,6 +79,7 @@ AMotionControllerPawn::AMotionControllerPawn()
 	RightHand->SetRelativeRotation(FRotator(0.0, 0.0, 90.0));
 	RightHand->SetRelativeLocation(FVector(10.0, 10.0, 0.0));
 
+
 }
 
 // Called when the game starts or when spawned
@@ -115,7 +116,6 @@ void AMotionControllerPawn::MotionControlLeftTriggerPressed()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Left trigger is PRESSED"));
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Left trigger is PRESSED");
-	//GripState = GripEnum::Grab;
 }
 
 // Left Trigger Release
@@ -123,7 +123,6 @@ void AMotionControllerPawn::MotionControlLeftTriggerReleased()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Left trigger is RELEASED"));
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Left trigger is RELEASED");
-	//GripState = GripEnum::Open;
 }
 
 // Right Trigger Press
@@ -131,7 +130,6 @@ void AMotionControllerPawn::MotionControlRightTriggerPressed()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Right trigger is PRESSED"));
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Right trigger is PRESSED");
-	//GripState = GripEnum::Grab;
 }
 
 // Right Trigger Release
@@ -139,17 +137,13 @@ void AMotionControllerPawn::MotionControlRightTriggerReleased()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Right trigger is RELEASED"));
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Right trigger is RELEASED");
-	//GripState = GripEnum::Open;
 }
 
-
-
 // Called to bind functionality to input
-
 void AMotionControllerPawn::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
 	Super::SetupPlayerInputComponent(InputComponent);	
-	//Motion controller bindings
+
 	InputComponent->BindAction("LeftTrigger", EInputEvent::IE_Pressed, this, &AMotionControllerPawn::MotionControlLeftTriggerPressed);
 	InputComponent->BindAction("LeftTrigger", EInputEvent::IE_Released, this, &AMotionControllerPawn::MotionControlLeftTriggerReleased);
 	InputComponent->BindAction("RightTrigger", EInputEvent::IE_Pressed, this, &AMotionControllerPawn::MotionControlRightTriggerPressed);

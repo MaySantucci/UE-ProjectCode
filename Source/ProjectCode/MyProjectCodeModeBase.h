@@ -59,5 +59,6 @@ public:
 private:
 	EPlayState CurrentState;
 	void HandleNewState(EPlayState NewState);
+	bool bSpawnEnable;
 
 };
