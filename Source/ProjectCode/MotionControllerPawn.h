@@ -11,6 +11,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/SphereComponent.h"
 #include "Runtime/Engine/Classes/Components/StereoLayerComponent.h"
+#include "Runtime/UMG/Public/Components/WidgetComponent.h"
 #include "MotionControllerPawn.generated.h"
 
 /* 
@@ -39,6 +40,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "StereoLayer")
 		UStereoLayerComponent* StereoLayer;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "StereoLayer")
+		UWidgetComponent* Widget;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		UMotionControllerComponent* LeftHand;
