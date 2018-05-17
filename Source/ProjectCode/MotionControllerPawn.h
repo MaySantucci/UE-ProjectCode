@@ -10,6 +10,7 @@
 #include "Components/SplineComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/SphereComponent.h"
+#include "Runtime/Engine/Classes/Components/StereoLayerComponent.h"
 #include "MotionControllerPawn.generated.h"
 
 /* 
@@ -35,6 +36,10 @@ public:
 		USceneComponent* VROrigin;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		UCameraComponent* Camera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "StereoLayer")
+		UStereoLayerComponent* StereoLayer;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		UMotionControllerComponent* LeftHand;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
