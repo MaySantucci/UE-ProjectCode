@@ -30,6 +30,7 @@ AMyProjectCodeModeBase::AMyProjectCodeModeBase()
 
 void AMyProjectCodeModeBase::BeginPlay() 
 {
+	SetCurrentState(EPlayState::EPlaying);
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("BEGIN PLAY"));
 
 	if (bSpawnEnable)
@@ -141,12 +142,23 @@ void AMyProjectCodeModeBase::SetCurrentState(EPlayState NewState) {
 	HandleNewState(NewState);
 }
 
+
+void AMyProjectCodeModeBase::CreateHUD() {
+	FVector NewLocation = FVector(0.0f, 0.0f, 0.0f);
+	FActorSpawnParameters HUDSpawnParameters;
+	HUDSpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+
+	ScoreHUD = GetWorld()->SpawnActor<AScore_HUD>(AScore_HUD::StaticClass(), NewLocation, FRotator::ZeroRotator, HUDSpawnParameters);
+
+}
+
 void AMyProjectCodeModeBase::HandleNewState(EPlayState NewState) {
 	
 	switch (NewState) {
 	case EPlayState::EIntro:
 		break;
 	case EPlayState::EPlaying:
+		CreateHUD();
 		break;
 	case EPlayState::EEndGame:
 		bSpawnEnable = false;

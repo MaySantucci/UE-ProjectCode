@@ -21,6 +21,10 @@ AScore_HUD::AScore_HUD()
 	Widget->SetWorldScale3D(FVector(-1.0, -1.0f, 1.0f));
 	Widget->AttachTo(StereoLayer);
 
+	auto ScoreAsset = ConstructorHelpers::FObjectFinder<UClass>(TEXT("WidgetBlueprint'/Game/UMG/Score_UMG.Score_UMG_C'"));
+	if (ScoreAsset.Object != nullptr) {
+		Widget->SetWidgetClass(ScoreAsset.Object);
+	}
 }
 
 // Called when the game starts or when spawned

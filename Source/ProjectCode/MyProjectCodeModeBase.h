@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "MyFirstActor.h"
 #include "MySecondActor.h"
+#include "Score_HUD.h"
 #include "MyProjectCodeModeBase.generated.h"
 
 enum class EPlayState : short {
@@ -31,6 +32,9 @@ public:
 	UPROPERTY()
 		AMySecondActor* SpawnedSecondActor;
 
+	UPROPERTY()
+		AScore_HUD* ScoreHUD;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<AMyFirstActor*> AllFirstSpawnedActors;
 
@@ -43,6 +47,11 @@ public:
 		void DestroyActorFunction();
 	UFUNCTION()
 		void CreateActorFunction();
+
+	UFUNCTION()
+		void CreateHUD();
+
+
 	UFUNCTION()
 		void DestroySecondActorFunction();
 	UFUNCTION()
