@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "MyFirstActor.h"
 #include "MySecondActor.h"
+#include "IntroHUD.h"
 #include "Score_HUD.h"
 #include "End_HUD.h"
 #include "MyProjectCodeModeBase.generated.h"
@@ -34,7 +35,7 @@ public:
 		AMySecondActor* SpawnedSecondActor;
 
 	UPROPERTY()
-		AScore_HUD* IntroHUD;
+		AIntroHUD* IntroHUD;
 	UPROPERTY()
 		AScore_HUD* ScoreHUD;
 	UPROPERTY()

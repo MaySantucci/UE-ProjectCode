@@ -24,13 +24,13 @@ AMyProjectCodeModeBase::AMyProjectCodeModeBase()
 		UE_LOG(LogTemp, Warning, TEXT("Nessun Pawn Trovato"));
 	}
 
-	bSpawnEnable = true;
+	bSpawnEnable = false;
 	
 }
 
 void AMyProjectCodeModeBase::BeginPlay() 
 {
-	SetCurrentState(EPlayState::EPlaying);
+	SetCurrentState(EPlayState::EIntro);
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("BEGIN PLAY"));
 
 	if (bSpawnEnable)
@@ -144,6 +144,13 @@ void AMyProjectCodeModeBase::SetCurrentState(EPlayState NewState) {
 
 
 void AMyProjectCodeModeBase::CreateIntroHUD() {
+	FVector NewLocation = FVector(0.0f, 0.0f, 120.0f);
+	FActorSpawnParameters HUDSpawnParameters;
+	HUDSpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+	FRotator Rotation = FRotator(0.0f, 90.0f, 0.0f);
+
+	IntroHUD = GetWorld()->SpawnActor<AIntroHUD>(AIntroHUD::StaticClass(), NewLocation, Rotation, HUDSpawnParameters);
+
 
 }
 void AMyProjectCodeModeBase::CreateScoreHUD() {
@@ -164,6 +171,9 @@ void AMyProjectCodeModeBase::CreateEndHUD() {
 
 
 void AMyProjectCodeModeBase::DestroyIntroHUD() {
+	if (IntroHUD != nullptr) {
+		IntroHUD->Destroy();
+	}
 }
 void AMyProjectCodeModeBase::DestroyScoreHUD() {
 	if (ScoreHUD != nullptr) {
@@ -181,8 +191,11 @@ void AMyProjectCodeModeBase::HandleNewState(EPlayState NewState) {
 	
 	switch (NewState) {
 	case EPlayState::EIntro:
+		CreateIntroHUD();
 		break;
 	case EPlayState::EPlaying:
+		bSpawnEnable = true;
+		DestroyIntroHUD();
 		CreateScoreHUD();
 		break;
 	case EPlayState::EEndGame:
