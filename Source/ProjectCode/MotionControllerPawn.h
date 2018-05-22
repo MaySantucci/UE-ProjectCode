@@ -37,11 +37,12 @@ public:
 		USceneComponent* VROrigin;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		UCameraComponent* Camera;
-
+/*
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "StereoLayer")
 		UStereoLayerComponent* StereoLayer;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "StereoLayer")
 		UWidgetComponent* Widget;
+*/
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		UMotionControllerComponent* LeftHand;

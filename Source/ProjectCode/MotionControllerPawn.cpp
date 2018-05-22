@@ -79,7 +79,7 @@ AMotionControllerPawn::AMotionControllerPawn()
 	RightHand->SetRelativeRotation(FRotator(0.0, 0.0, 90.0));
 	RightHand->SetRelativeLocation(FVector(10.0, 10.0, 0.0));
 
-
+	/*
 	StereoLayer = CreateDefaultSubobject<UStereoLayerComponent>(TEXT("StereoLayer"));
 	StereoLayer->SetRelativeLocation(FVector(400.0f, 0.0f, 0.0f));
 	StereoLayer->SetQuadSize(FVector2D(150.0f, 150.0f));
@@ -94,6 +94,8 @@ AMotionControllerPawn::AMotionControllerPawn()
 	{
 		Widget->SetWidgetClass(WidgetAsset.Object);
 	}
+	
+	*/
 
 
 }
