@@ -7,6 +7,7 @@
 #include "MyFirstActor.h"
 #include "MySecondActor.h"
 #include "Score_HUD.h"
+#include "End_HUD.h"
 #include "MyProjectCodeModeBase.generated.h"
 
 enum class EPlayState : short {
@@ -33,7 +34,11 @@ public:
 		AMySecondActor* SpawnedSecondActor;
 
 	UPROPERTY()
+		AScore_HUD* IntroHUD;
+	UPROPERTY()
 		AScore_HUD* ScoreHUD;
+	UPROPERTY()
+		AEnd_HUD* EndHUD;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<AMyFirstActor*> AllFirstSpawnedActors;
@@ -49,7 +54,17 @@ public:
 		void CreateActorFunction();
 
 	UFUNCTION()
-		void CreateHUD();
+		void CreateIntroHUD();
+	UFUNCTION()
+		void CreateScoreHUD();
+	UFUNCTION()
+		void CreateEndHUD();
+	UFUNCTION()
+		void DestroyIntroHUD();
+	UFUNCTION()
+		void DestroyScoreHUD();
+	UFUNCTION()
+		void DestroyEndHUD();
 
 
 	UFUNCTION()

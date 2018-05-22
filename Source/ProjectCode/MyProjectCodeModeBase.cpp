@@ -143,7 +143,10 @@ void AMyProjectCodeModeBase::SetCurrentState(EPlayState NewState) {
 }
 
 
-void AMyProjectCodeModeBase::CreateHUD() {
+void AMyProjectCodeModeBase::CreateIntroHUD() {
+
+}
+void AMyProjectCodeModeBase::CreateScoreHUD() {
 	FVector NewLocation = FVector(0.0f, 0.0f, 0.0f);
 	FActorSpawnParameters HUDSpawnParameters;
 	HUDSpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
@@ -151,6 +154,28 @@ void AMyProjectCodeModeBase::CreateHUD() {
 	ScoreHUD = GetWorld()->SpawnActor<AScore_HUD>(AScore_HUD::StaticClass(), NewLocation, FRotator::ZeroRotator, HUDSpawnParameters);
 
 }
+void AMyProjectCodeModeBase::CreateEndHUD() {
+	FVector NewLocation = FVector(0.0f, 0.0f, 0.0f);
+	FActorSpawnParameters HUDSpawnParameters;
+	HUDSpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+
+	EndHUD = GetWorld()->SpawnActor<AEnd_HUD>(AEnd_HUD::StaticClass(), NewLocation, FRotator::ZeroRotator, HUDSpawnParameters);
+}
+
+
+void AMyProjectCodeModeBase::DestroyIntroHUD() {
+}
+void AMyProjectCodeModeBase::DestroyScoreHUD() {
+	if (ScoreHUD != nullptr) {
+		ScoreHUD->Destroy();
+	}
+}
+void AMyProjectCodeModeBase::DestroyEndHUD() {
+	if (EndHUD != nullptr) {
+		EndHUD->Destroy();
+	}
+}
+
 
 void AMyProjectCodeModeBase::HandleNewState(EPlayState NewState) {
 	
@@ -158,9 +183,11 @@ void AMyProjectCodeModeBase::HandleNewState(EPlayState NewState) {
 	case EPlayState::EIntro:
 		break;
 	case EPlayState::EPlaying:
-		CreateHUD();
+		CreateScoreHUD();
 		break;
 	case EPlayState::EEndGame:
+		DestroyScoreHUD();
+		CreateEndHUD();
 		bSpawnEnable = false;
 		UE_LOG(LogTemp, Warning, TEXT("Fine Gioco"));
 
