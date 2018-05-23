@@ -34,6 +34,11 @@ public:
 		UStereoLayerComponent* StereoLayer;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "WidgetScore")
 		UWidgetComponent* Widget;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "WidgetScore")
+		bool isPressed;
+
+	UFUNCTION(BlueprintCallable)
+		bool SetIsPressed(bool NewVal);
 
 /*
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "ButtonWidget")

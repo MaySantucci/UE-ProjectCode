@@ -33,21 +33,33 @@ void AMyProjectCodeModeBase::BeginPlay()
 	SetCurrentState(EPlayState::EIntro);
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("BEGIN PLAY"));
 
+	
 	if (bSpawnEnable)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Spawn Actors"));
 		CreateActorFunction();
 		CreateSecondActorFunction();
 	}
+	
 }
 
 void AMyProjectCodeModeBase::Tick(float DeltaTime) {
 
 	AMotionControllerPawn * MyCharacter = Cast<AMotionControllerPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+	bool x = true;
+	bool y = true;
 
-	if(MyCharacter->TotalGood == 3) {
+
+	if (IntroHUD->isPressed) {
+		IntroHUD->SetIsPressed(false);
+		SetCurrentState(EPlayState::EPlaying);
+	}
+
+
+	if (MyCharacter->TotalGood == 3) {
 		SetCurrentState(EPlayState::EEndGame);
 	}
+	
 }
 
 void AMyProjectCodeModeBase::CreateActorFunction() 
@@ -197,6 +209,9 @@ void AMyProjectCodeModeBase::HandleNewState(EPlayState NewState) {
 		bSpawnEnable = true;
 		DestroyIntroHUD();
 		CreateScoreHUD();
+
+		CreateActorFunction();
+		CreateSecondActorFunction();
 		break;
 	case EPlayState::EEndGame:
 		DestroyScoreHUD();

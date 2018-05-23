@@ -56,6 +56,8 @@ AIntroHUD::AIntroHUD()
 	Button->OnComponentBeginOverlap.AddDynamic(this, &AIntroHUD::OnOverlapBegin);
 	*/
 
+	SetIsPressed(false);
+
 }
 
 // Called when the game starts or when spawned
@@ -71,6 +73,13 @@ void AIntroHUD::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+
+bool AIntroHUD::SetIsPressed(bool NewVal)
+{
+	isPressed = NewVal;
+	return isPressed;
+}
+
 /*
 void AIntroHUD::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
