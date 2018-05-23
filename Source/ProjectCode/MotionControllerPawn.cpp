@@ -56,6 +56,9 @@ AMotionControllerPawn::AMotionControllerPawn()
 	LeftHand->SetRelativeRotation(FRotator(0.0, 0.0, -90.0));
 	LeftHand->SetRelativeLocation(FVector(10.0, -10.0, 0.0));
 
+	LeftWidgetInteraction = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("LeftWidgetInteraction"));
+	LeftWidgetInteraction->AttachToComponent(LeftHand, FAttachmentTransformRules::KeepRelativeTransform);
+
 	RightMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("RightMesh"));
 	RightMesh->AttachToComponent(RightHand, FAttachmentTransformRules::KeepWorldTransform);
 
@@ -75,6 +78,10 @@ AMotionControllerPawn::AMotionControllerPawn()
 		RightMesh->SetAnimInstanceClass(RightMeshAnimation.Object);
 	}
 	
+
+	RightWidgetInteraction = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("RightWidgetInteraction"));
+	RightWidgetInteraction->AttachToComponent(RightHand, FAttachmentTransformRules::KeepRelativeTransform);
+
 	RightHand->SetWorldScale3D(FVector(1.0, 1.0, 1.0));
 	RightHand->SetRelativeRotation(FRotator(0.0, 0.0, 90.0));
 	RightHand->SetRelativeLocation(FVector(10.0, 10.0, 0.0));

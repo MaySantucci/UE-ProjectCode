@@ -12,6 +12,7 @@
 #include "Components/SphereComponent.h"
 #include "Runtime/Engine/Classes/Components/StereoLayerComponent.h"
 #include "Runtime/UMG/Public/Components/WidgetComponent.h"
+#include "Runtime/UMG/Public/Components/WidgetInteractionComponent.h"
 #include "MotionControllerPawn.generated.h"
 
 /* 
@@ -51,9 +52,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		USkeletalMeshComponent* LeftMesh;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
+		UWidgetInteractionComponent* LeftWidgetInteraction;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		USkeletalMeshComponent* RightMesh;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
+		UWidgetInteractionComponent* RightWidgetInteraction;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MotionController")
 		FName DeviceName;
+
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Score")
 		int TotalGood;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Score")

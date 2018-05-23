@@ -7,6 +7,8 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/TextRenderComponent.h"
+#include "Runtime/Engine/Classes/Components/StereoLayerComponent.h"
+#include "Runtime/UMG/Public/Components/WidgetComponent.h"
 #include "IntroHUD.generated.h"
 
 UCLASS()
@@ -28,12 +30,21 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "ButtonWidget")
 		USceneComponent* Scene;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "WidgetScore")
+		UStereoLayerComponent* StereoLayer;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "WidgetScore")
+		UWidgetComponent* Widget;
+
+/*
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "ButtonWidget")
 		UStaticMeshComponent* Button;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "ButtonWidget")
 		UBoxComponent* CollisionBox;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "ButtonWidget")
 		UTextRenderComponent* PlayText;
-
-	
+	UFUNCTION()
+		void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	UFUNCTION()
+		void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+*/
 };

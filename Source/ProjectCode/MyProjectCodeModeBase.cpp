@@ -12,7 +12,7 @@
 AMyProjectCodeModeBase::AMyProjectCodeModeBase()
 {
 	PrimaryActorTick.bCanEverTick = true;
-	UE_LOG(LogTemp, Warning, TEXT("Inizioooo"));
+	UE_LOG	(LogTemp, Warning, TEXT("Inizioooo"));
 	PlayerControllerClass = AMyPlayer::StaticClass();
 	
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnObject(TEXT("Blueprint'/Game/MyMotionControllerPawn.MyMotionControllerPawn_C'"));
