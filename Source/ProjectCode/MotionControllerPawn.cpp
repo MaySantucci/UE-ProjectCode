@@ -85,26 +85,6 @@ AMotionControllerPawn::AMotionControllerPawn()
 	RightHand->SetWorldScale3D(FVector(1.0, 1.0, 1.0));
 	RightHand->SetRelativeRotation(FRotator(0.0, 0.0, 90.0));
 	RightHand->SetRelativeLocation(FVector(10.0, 10.0, 0.0));
-
-	/*
-	StereoLayer = CreateDefaultSubobject<UStereoLayerComponent>(TEXT("StereoLayer"));
-	StereoLayer->SetRelativeLocation(FVector(400.0f, 0.0f, 0.0f));
-	StereoLayer->SetQuadSize(FVector2D(150.0f, 150.0f));
-
-	Widget = CreateDefaultSubobject<UWidgetComponent>(TEXT("Widget"));
-	Widget->SetWorldScale3D(FVector(-1.0f, -1.0f, 1.0f));
-	Widget->SetRelativeLocation(FVector(400.0f, 0.0f, 120.0f));
-
-	//auto WidgetAsset = ConstructorHelpers::FObjectFinder<UClass>(TEXT("WidgetBlueprint'/Game/UMG/FirstLevel_UMG.FirstLevel_UMG_C'"));
-	auto WidgetAsset = ConstructorHelpers::FObjectFinder<UClass>(TEXT("WidgetBlueprint'/Game/UMG/EndLevel_UMG.EndLevel_UMG_C'"));
-	if (WidgetAsset.Object != nullptr) 
-	{
-		Widget->SetWidgetClass(WidgetAsset.Object);
-	}
-	
-	*/
-
-
 }
 
 // Called when the game starts or when spawned

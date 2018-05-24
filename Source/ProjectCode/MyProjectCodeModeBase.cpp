@@ -13,10 +13,13 @@ AMyProjectCodeModeBase::AMyProjectCodeModeBase()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	UE_LOG	(LogTemp, Warning, TEXT("Inizioooo"));
-	PlayerControllerClass = AMyPlayer::StaticClass();
+	if (AMyPlayer::StaticClass() != nullptr)
+	{
+		PlayerControllerClass = AMyPlayer::StaticClass();
+	}
 	
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnObject(TEXT("Blueprint'/Game/MyMotionControllerPawn.MyMotionControllerPawn_C'"));
-	if (PlayerPawnObject.Class != NULL)
+	if (PlayerPawnObject.Class != nullptr)
 	{
 		DefaultPawnClass = PlayerPawnObject.Class;
 	}
@@ -32,15 +35,6 @@ void AMyProjectCodeModeBase::BeginPlay()
 {
 	SetCurrentState(EPlayState::EIntro);
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("BEGIN PLAY"));
-
-	/*
-	if (bSpawnEnable)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Spawn Actors"));
-		CreateActorFunction();
-		CreateSecondActorFunction();
-	}
-	*/
 	
 }
 
@@ -50,15 +44,17 @@ void AMyProjectCodeModeBase::Tick(float DeltaTime) {
 	bool x = true;
 	bool y = true;
 
-
-	if (IntroHUD->isPressed) {
-		IntroHUD->SetIsPressed(false);
-		SetCurrentState(EPlayState::EPlaying);
+	if (IntroHUD != nullptr) {
+		if (IntroHUD->isPressed) {
+			IntroHUD->SetIsPressed(false);
+			SetCurrentState(EPlayState::EPlaying);
+		}
 	}
 
-
-	if (MyCharacter->TotalGood == 3) {
-		SetCurrentState(EPlayState::EEndGame);
+	if (MyCharacter != nullptr) {
+		if (MyCharacter->TotalGood == 3) {
+			SetCurrentState(EPlayState::EEndGame);
+		}
 	}
 	
 }
@@ -83,8 +79,6 @@ void AMyProjectCodeModeBase::CreateActorFunction()
 		}
 
 		int size = AllFirstSpawnedActors.Num();
-		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::White, FString::Printf(TEXT("Actor Created. Array: %d"), size));
-		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Location. X: %f . y: %f. z: %f."), x, y, z));
 	}
 }
 
@@ -124,8 +118,6 @@ void AMyProjectCodeModeBase::CreateSecondActorFunction() {
 		}
 
 		int size = AllSecondSpawnedActors.Num();
-		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("SECOND_Actor Created. Array: %d"), size));
-		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, FString::Printf(TEXT("SECOND_Location. X: %f . y: %f. z: %f."), x, y, z));
 	}
 }
 
@@ -222,7 +214,11 @@ void AMyProjectCodeModeBase::HandleNewState(EPlayState NewState) {
 
 		AMotionControllerPawn * MyCharacter = Cast<AMotionControllerPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
 		APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
-		MyCharacter->DisableInput(PlayerController);
+		
+		if (MyCharacter != nullptr && PlayerController != nullptr) {
+			MyCharacter->DisableInput(PlayerController);
+		}
+		
 		break;
 	}
 }

@@ -13,16 +13,16 @@ AMyFirstActor::AMyFirstActor()
 	PrimaryActorTick.bCanEverTick = true;
 
 	MyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MyMesh"));
-	MyMesh->SetWorldScale3D(FVector(0.5f, 0.5f, 0.5f));
+	MyMesh->SetWorldScale3D(FVector(0.2f, 0.2f, 0.2f));
 
-	auto MyMeshAsset = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("/Game/StarterContent/Shapes/Shape_Sphere.Shape_Sphere"));
+	auto MyMeshAsset = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Game/Mesh/WhiteFlower/white_flower.white_flower'"));
 
-	auto MyMeshMaterial = ConstructorHelpers::FObjectFinder<UMaterialInterface>(TEXT("/Game/StarterContent/Materials/M_Wood_Pine"));
+	//auto MyMeshMaterial = ConstructorHelpers::FObjectFinder<UMaterialInterface>(TEXT("/Game/StarterContent/Materials/M_Wood_Pine"));
 
 
 	if (MyMeshAsset.Object != nullptr) {
 		MyMesh->SetStaticMesh(MyMeshAsset.Object);
-		MyMesh->SetMaterial(0, MyMeshMaterial.Object);
+		//MyMesh->SetMaterial(0, MyMeshMaterial.Object);
 	}
 
 	MyMesh->SetMobility(EComponentMobility::Movable);
