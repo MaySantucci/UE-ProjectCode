@@ -80,7 +80,7 @@ public:
 
 	EPlayState GetCurrentState() const;
 	void SetCurrentState(EPlayState NewState);
-
+	
 private:
 	EPlayState CurrentState;
 	void HandleNewState(EPlayState NewState);

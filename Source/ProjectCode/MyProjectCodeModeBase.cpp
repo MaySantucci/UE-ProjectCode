@@ -33,13 +33,14 @@ void AMyProjectCodeModeBase::BeginPlay()
 	SetCurrentState(EPlayState::EIntro);
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("BEGIN PLAY"));
 
-	
+	/*
 	if (bSpawnEnable)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Spawn Actors"));
 		CreateActorFunction();
 		CreateSecondActorFunction();
 	}
+	*/
 	
 }
 
@@ -209,9 +210,9 @@ void AMyProjectCodeModeBase::HandleNewState(EPlayState NewState) {
 		bSpawnEnable = true;
 		DestroyIntroHUD();
 		CreateScoreHUD();
-
 		CreateActorFunction();
 		CreateSecondActorFunction();
+	
 		break;
 	case EPlayState::EEndGame:
 		DestroyScoreHUD();
