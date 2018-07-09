@@ -63,7 +63,7 @@ void AMyProjectCodeModeBase::CreateActorFunction()
 {
 	if (bSpawnEnable)
 	{
-		GetWorldTimerManager().SetTimer(TimeoutStart, this, &AMyProjectCodeModeBase::CreateActorFunction, rand() % 20 + 5);
+		GetWorldTimerManager().SetTimer(TimeoutStart, this, &AMyProjectCodeModeBase::CreateActorFunction, rand() % 7 + 3);
 
 		float x = rand() % 400 + (-400);
 		float y = rand() % 400 + (-400);
@@ -102,7 +102,7 @@ void AMyProjectCodeModeBase::DestroyActorFunction() {
 void AMyProjectCodeModeBase::CreateSecondActorFunction() {
 	if (bSpawnEnable)
 	{
-		GetWorldTimerManager().SetTimer(TimeoutSecondStart, this, &AMyProjectCodeModeBase::CreateSecondActorFunction, rand() % 20 + 5);
+		GetWorldTimerManager().SetTimer(TimeoutSecondStart, this, &AMyProjectCodeModeBase::CreateSecondActorFunction, rand() % 7 + 3);
 
 		float x = rand() % 400 + (-400);
 		float y = rand() % 400 + (-400);
