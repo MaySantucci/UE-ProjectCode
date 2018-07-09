@@ -9,12 +9,15 @@
 /**
  * 
  */
+
 UCLASS()
 class PROJECTCODE_API AProjectCodeGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+	AProjectCodeGameModeBase();
 	
-	
+private:
 	
 };

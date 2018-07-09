@@ -8,9 +8,9 @@ public class ProjectCode : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "LevelSequence" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "HeadMountedDisplay", "SteamVRController", "InputCore", "SteamVR" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "HeadMountedDisplay", "SteamVRController", "InputCore", "SteamVR", "LevelSequence" });
        
         // Uncomment if you are using Slate UI
         // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
